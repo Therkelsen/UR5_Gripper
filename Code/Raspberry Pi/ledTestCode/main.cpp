@@ -4,17 +4,18 @@
 
 int main()
 {
+    int led = 13;
     std::cout << "Enabling I/O control" << std::endl;
     wiringPiSetup();
     std::cout << "Setting pinmode" << std::endl;
-    pinMode(0,OUTPUT);
+    pinMode(led,OUTPUT);
     while (true) {
         std::cout << "LED on" << std::endl;
-        digitalWrite(0, HIGH);
-        delay(1000);
+        digitalWrite(led, HIGH);
+        delay(5000);
         std::cout << "LED off" << std::endl;
-        digitalWrite(0, LOW);
-        delay(1000);
+        digitalWrite(led, LOW);
+        delay(5000);
     }
     return 0;
 }
