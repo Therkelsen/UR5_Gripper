@@ -36,7 +36,7 @@ public:
     }
     void
     execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-        cout >> "Hello there" << endl;
+        cout << "Hello there" << endl;
 
         *retvalP = xmlrpc_c::value_int(42);
     }
@@ -60,16 +60,16 @@ public:
 
         switch(pressure) {
         case 0:
-            cout >> "Secure grip - soft" << endl;
+            cout << "Secure grip - soft" << endl;
             break;
         case 1:
-            cout >> "Secure grip - fire" << endl;
+            cout << "Secure grip - fire" << endl;
             break;
         case 2:
-            cout >> "Secure grip - hard" << endl;
+            cout << "Secure grip - hard" << endl;
             break;
         default:
-            cout >> "ERROR - undefined value for pressure" < endl;
+            cout << "ERROR - undefined value for pressure" << endl;
             break;
         }
 
@@ -92,7 +92,7 @@ public:
     }
     void
     execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-        cout >> "Secure grip - soft" << endl;
+        cout << "Secure grip - soft" << endl;
 
         sleep(1);
 
