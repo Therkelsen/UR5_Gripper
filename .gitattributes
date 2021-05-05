@@ -3,3 +3,4 @@
 *.stash linguist-vendored=false
 *.debug linguist-vendored=false
 *.release linguist-vendored=false
+*/Makefile linguist-vendored=false
