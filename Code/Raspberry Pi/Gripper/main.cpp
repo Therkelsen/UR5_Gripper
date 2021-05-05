@@ -100,9 +100,9 @@ public:
     }
 };
 
-
-int main() {
-    cout << "Starting the XMLRPC server" << endl;
+int main(int const, const char ** const) {
+    const unsigned int port = 12345;
+    cout << "Starting the XMLRPC server on port " << port << endl;
     try {
         xmlrpc_c::registry myRegistry;
 
@@ -114,12 +114,17 @@ int main() {
         myRegistry.addMethod("secure_grip", secureGrip);
         myRegistry.addMethod("release_grip", releaseGrip);
 
-        xmlrpc_c::serverAbyss myAbyssServer(xmlrpc_c::serverAbyss::constrOpt().registryP(&myRegistry).portNumber(56677));
+        xmlrpc_c::serverAbyss myAbyssServer(
+            xmlrpc_c::serverAbyss::constrOpt().registryP(&myRegistry).portNumber(port)
+        );
 
-        myAbyssServer.run();
-        assert(false);
+        myAbyssServer.run();    // stuck here
+
+        //xmlrpc_c::serverAbyss.run() never returns
+        //assert(false);
+
     } catch (exception const& e) {
-        cerr << "ERROR :" << e.what() << endl;
+        cerr << "ERROR: " << e.what() << endl;
     }
 
     cout << "Inclusions and definitions handled" << endl;
