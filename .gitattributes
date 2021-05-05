@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+*.stash linguist-vendored=false
+*.debug linguist-vendored=false
+*.release linguist-vendored=false
