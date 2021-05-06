@@ -6,7 +6,7 @@ dRobTek Group 6 - Second semester project for B.E. in Robotics Technology
 <div style="text-align: justify">A gripper for the Universal Robots UR5 robot is to be developed during this semester project. An idea could be to follow the block diagram below, but not required.</div>
 <p align="center"> <img src="Assets/Diagram.png" alt="Diagram" title="Diagram" width="60%" height="60%"/> </p>
 <div style="text-align: justify">It is expected that you at least develop:<br>
-•	A 3D model of a gripper that can be printed or otherwise constructed.\
+•	A 3D model of a gripper that can be printed or otherwise constructed.<br>
 •	Electronics to control the gripper.<br>
 •	A URCaps plugin for the UR controller.<br>
 •	Software design of a C++ Program developed on a Raspberry PI, a PC, or possibly both.<br>
