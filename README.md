@@ -22,6 +22,7 @@ The gripper must fulfil the following requirements:<br>
 •	It is not allowed to use the digital I/O from the UR robot. All I/O must be done through the Raspberry Pi microcontroller. Please remember that the power output from digital I/O is very limited.<br>
 </div>
 <br>
+
 ## Introduction
 <div style="text-align: justify">
   
