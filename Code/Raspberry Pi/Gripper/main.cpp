@@ -36,7 +36,7 @@ public:
     }
     void
     execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-        cout >> "Hello there" << endl;
+        cout << "Hello there" << endl;
 
         *retvalP = xmlrpc_c::value_int(42);
     }
@@ -60,16 +60,16 @@ public:
 
         switch(pressure) {
         case 0:
-            cout >> "Secure grip - soft" << endl;
+            cout << "Secure grip - soft" << endl;
             break;
         case 1:
-            cout >> "Secure grip - fire" << endl;
+            cout << "Secure grip - fire" << endl;
             break;
         case 2:
-            cout >> "Secure grip - hard" << endl;
+            cout << "Secure grip - hard" << endl;
             break;
         default:
-            cout >> "ERROR - undefined value for pressure" < endl;
+            cout << "ERROR - undefined value for pressure" << endl;
             break;
         }
 
@@ -92,7 +92,7 @@ public:
     }
     void
     execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-        cout >> "Secure grip - soft" << endl;
+        cout << "Secure grip - soft" << endl;
 
         sleep(1);
 
@@ -100,9 +100,9 @@ public:
     }
 };
 
-
-int main() {
-    cout << "Starting the XMLRPC server" << endl;
+int main(int const, const char ** const) {
+    const unsigned int port = 12345;
+    cout << "Starting the XMLRPC server on port " << port << endl;
     try {
         xmlrpc_c::registry myRegistry;
 
@@ -114,12 +114,17 @@ int main() {
         myRegistry.addMethod("secure_grip", secureGrip);
         myRegistry.addMethod("release_grip", releaseGrip);
 
-        xmlrpc_c::serverAbyss myAbyssServer(xmlrpc_c::serverAbyss::constrOpt().registryP(&myRegistry).portNumber(56677));
+        xmlrpc_c::serverAbyss myAbyssServer(
+            xmlrpc_c::serverAbyss::constrOpt().registryP(&myRegistry).portNumber(port)
+        );
 
-        myAbyssServer.run();
-        assert(false);
+        myAbyssServer.run();    // stuck here
+
+        //xmlrpc_c::serverAbyss.run() never returns
+        //assert(false);
+
     } catch (exception const& e) {
-        cerr << "ERROR :" << e.what() << endl;
+        cerr << "ERROR: " << e.what() << endl;
     }
 
     cout << "Inclusions and definitions handled" << endl;

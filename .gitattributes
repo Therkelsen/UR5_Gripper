@@ -1,0 +1,6 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+*.stash linguist-vendored=true
+*.debug linguist-vendored=true
+*.release linguist-vendored=true
+*/Makefile linguist-vendored=true
