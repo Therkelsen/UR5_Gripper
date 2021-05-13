@@ -1,13 +1,15 @@
 #include "motorcontrol.h"
 #include <wiringPi.h>
 #include <softPwm.h>
+#include <iostream>
 
 MotorControl::MotorControl(){};
 
-MotorControl::MotorControl(int motorEnable, int motorPin1, int motorPin2) {
-    _motorEnableClock = motorEnable;
-    _motorEnableCounter = motorPin1;
+MotorControl::MotorControl(int motorEnable, int motorPin1, int motorPin2, int sensor) {
+    _motorEnable = motorEnable;
+    _motorPin1 = motorPin1;
     _motorPin2 = motorPin2;
+    _sensor = sensor;
 
     wiringPiSetup();
 
@@ -16,6 +18,7 @@ MotorControl::MotorControl(int motorEnable, int motorPin1, int motorPin2) {
     pinMode(motorEnable,OUTPUT);
     pinMode(_motorPin1,OUTPUT);
     pinMode(_motorPin2,OUTPUT);
+    pinMode(_sensor, INPUT);
 
     softPwmCreate(_motorEnable,35,100);
 
@@ -25,27 +28,28 @@ MotorControl::MotorControl(int motorEnable, int motorPin1, int motorPin2) {
 
 void MotorControl::calibrate(){
     //  Reverse polarity to run motor backwards
-    digitalWrite(motorPin1, HIGH);
-    digitalWrite(motorPin2, LOW);
+    digitalWrite(_motorPin1, HIGH);
+    digitalWrite(_motorPin2, LOW);
 
     //  Run motor backwards until sensor is pressed
-    while(sensor != true) {
-        softPwmWrite(_motorEnable,100);
+    while(digitalRead(_sensor != HIGH)) {
+        softPwmWrite(_motorEnable,65);
     }
+    softPwmWrite(_motorEnable, 0);
 
     //  Forwards polarity to prepare for gripping an object
-    digitalWrite(motorPin1, LOW);
-    digitalWrite(motorPin2, HIGH);
+    digitalWrite(_motorPin1, LOW);
+    digitalWrite(_motorPin2, HIGH);
 }
 
-void MotorControl::grip(int object){
+void MotorControl::grip(unsigned int object){
     //  Calibrate gripper
     calibrate();
     //  Run motor for x seconds, to grip can
 
     softPwmWrite(_motorEnable,100);
     delay(object);
-    softPwmStop(_motorEnable);
+    softPwmWrite(_motorEnable, 0);
 }
 
 void MotorControl::release(){
@@ -53,12 +57,8 @@ void MotorControl::release(){
     calibrate();
 }
 
-/*
-    cout << "Driving motor with 100% power for 5 seconds" << endl;
-    softPwmWrite(motorEnable,100);
-
-    delay(5000);
-
-    cout << "Stopping motor" << endl;
-    softPwmStop(motorEnable);
-*/
+void MotorControl::close(int time) {
+    softPwmWrite(_motorEnable,100);
+    delay(time);
+    softPwmWrite(_motorEnable, 0);
+}
