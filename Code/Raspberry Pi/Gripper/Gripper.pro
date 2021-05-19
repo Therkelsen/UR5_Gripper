@@ -4,8 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-        xmlrpc.cpp
+        main.cpp
 
 LIBS += -lwiringPi
 LIBS += -lpthread
@@ -16,6 +15,3 @@ LIBS += -Lusr/local/lib/ -lxmlrpc_server_abyss++
 
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/include
-
-HEADERS += \
-    xmlrpc.h
