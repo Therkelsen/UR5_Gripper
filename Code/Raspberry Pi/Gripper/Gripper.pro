@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-        xmlrpc.cpp
+        xmlrpc.cpp \
+    motorcontrol.cpp
 
 LIBS += -lwiringPi
 LIBS += -lpthread
@@ -13,9 +14,11 @@ LIBS += -Lusr/local/lib/ -lxmlrpc++
 LIBS += -Lusr/local/lib/ -lxmlrpc_util++
 LIBS += -Lusr/local/lib/ -lxmlrpc_server++
 LIBS += -Lusr/local/lib/ -lxmlrpc_server_abyss++
+LIBS += -lopen62541
 
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/include
 
 HEADERS += \
-        xmlrpc.h
+        xmlrpc.h \
+    motorcontrol.h

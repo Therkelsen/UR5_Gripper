@@ -7,13 +7,13 @@ using namespace std;
 
 int main() {
 
-    int sensor = 3;
+    int sensor = 12;
 
     wiringPiSetup();
     pinMode(sensor, INPUT);
 
     while (true) {
-        if (digitalRead(sensor) == HIGH) {
+        if (digitalRead(sensor) != HIGH) {
             cout << "HIGH" << endl;
         } else {
             cout << "LOW" << endl;

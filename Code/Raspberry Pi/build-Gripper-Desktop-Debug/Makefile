@@ -38,7 +38,7 @@ DISTNAME      = Gripper1.0.0
 DISTDIR = /home/pi/UR5_Gripper/Code/Raspberry\ Pi/build-Gripper-Desktop-Debug/.tmp/Gripper1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -lwiringPi -lpthread -Lusr/local/lib/ -lxmlrpc++ -lxmlrpc_util++ -lxmlrpc_server++ -lxmlrpc_server_abyss++ 
+LIBS          = $(SUBLIBS) -lwiringPi -lpthread -Lusr/local/lib/ -lxmlrpc++ -lxmlrpc_util++ -lxmlrpc_server++ -lxmlrpc_server_abyss++ -lopen62541 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -50,8 +50,12 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Gripper/main.cpp 
-OBJECTS       = main.o
+SOURCES       = ../Gripper/main.cpp \
+		../Gripper/xmlrpc.cpp \
+		../Gripper/motorcontrol.cpp 
+OBJECTS       = main.o \
+		xmlrpc.o \
+		motorcontrol.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/unix.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/linux.conf \
@@ -111,6 +115,7 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_post.prf \
+		../Gripper/.qmake.stash \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_pre.prf \
@@ -124,7 +129,10 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/lex.prf \
-		../Gripper/Gripper.pro  ../Gripper/main.cpp
+		../Gripper/Gripper.pro xmlrpc.h \
+		motorcontrol.h ../Gripper/main.cpp \
+		../Gripper/xmlrpc.cpp \
+		../Gripper/motorcontrol.cpp
 QMAKE_TARGET  = Gripper
 DESTDIR       = 
 TARGET        = Gripper
@@ -195,6 +203,7 @@ Makefile: ../Gripper/Gripper.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_pre.prf \
@@ -269,6 +278,7 @@ Makefile: ../Gripper/Gripper.pro /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_pre.prf:
@@ -326,8 +336,15 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Gripper/main.cpp 
+main.o: ../Gripper/main.cpp ../Gripper/motorcontrol.h \
+		../Gripper/xmlrpc.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Gripper/main.cpp
+
+xmlrpc.o: ../Gripper/xmlrpc.cpp ../Gripper/xmlrpc.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o xmlrpc.o ../Gripper/xmlrpc.cpp
+
+motorcontrol.o: ../Gripper/motorcontrol.cpp ../Gripper/motorcontrol.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o motorcontrol.o ../Gripper/motorcontrol.cpp
 
 ####### Install
 
