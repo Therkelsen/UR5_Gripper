@@ -40,8 +40,8 @@ tcp_server::tcp_server(unsigned int port) {
 }
 
 void tcp_server::runServer(std::string string) {
-
-    char *hello = strdup(string);
+    hello = new char[string.length() + 1];
+    strcpy(hello, string.c_str());
 
     if (listen(server_fd, 3) < 0) {
         perror("listen");
@@ -55,7 +55,7 @@ void tcp_server::runServer(std::string string) {
 
     valread = read( new_socket , buffer, 1024);
     printf("%s\n",buffer );
-    send(new_socket , string , strlen(string) , 0 );
+    send(new_socket, hello, strlen(hello), 0);
     printf("Hello message sent\n");
 }
 

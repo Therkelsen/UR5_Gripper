@@ -32,15 +32,17 @@ MotorControl::MotorControl(int motorEnable, int motorPin1, int motorPin2, int se
     std::cout << "MotorControl: GPIO access has been set up" << std::endl;
 
     std::stringstream ss;
-    ss << _numberOfGrips << "," << STATE;
+    ss << _numberOfGrips;
     ss >> string;
+    string.append(", ");
+    string.append(STATE);
 
     socket.runServer(string);
 }
 
 int MotorControl::calibrate(){
     std::cout << "MotorControl: Calibrating" << std::endl;
-    STATE = "CALIBRATE";
+    STATE = " CALIBRATE";
     while (true) {
         if (digitalRead(_sensor) == HIGH) {
             digitalWrite(_motorPin1, HIGH);
@@ -89,8 +91,12 @@ void MotorControl::close(unsigned int time) {
 void MotorControl::sendString() {
     std::cout << "MotorControl: Sending status string" << std::endl;
     std::stringstream ss;
-    ss << _numberOfGrips << ", " << STATE;
+    ss << _numberOfGrips;
     ss >> string;
+    string.append(", ");
+    string.append(STATE);
+
+    std::cout << "String: " << string << std::endl;
 
     socket.runServer(string);
 }
