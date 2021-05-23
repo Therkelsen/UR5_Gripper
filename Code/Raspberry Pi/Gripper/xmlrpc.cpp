@@ -19,14 +19,13 @@
 #include<unistd.h>
 #endif
 
-std::string STATE = "connecting";
+XMLRPC::XMLRPC(){}
 
 XMLRPC::XMLRPC(MotorControl motorCtrl){
     mc = motorCtrl;
 }
 
 void XMLRPC::runServer(const unsigned int port){
-
 
     std::cout << "Starting the XMLRPC server on port " << port << std::endl;
 
@@ -53,8 +52,4 @@ void XMLRPC::runServer(const unsigned int port){
     } catch (std::exception const& e) {
         std::cerr << "ERROR: " << e.what() << std::endl;
     }
-}
-
-std::string XMLRPC::getState(){
-    return STATE;
 }

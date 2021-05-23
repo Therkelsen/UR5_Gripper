@@ -6,7 +6,8 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
         xmlrpc.cpp \
-    motorcontrol.cpp
+    motorcontrol.cpp \
+    tcp_server.cpp
 
 LIBS += -lwiringPi
 LIBS += -lpthread
@@ -21,4 +22,7 @@ DEPENDPATH += /usr/local/include
 
 HEADERS += \
         xmlrpc.h \
-    motorcontrol.h
+    motorcontrol.h \
+    tcp_server.h
+
+QT += network

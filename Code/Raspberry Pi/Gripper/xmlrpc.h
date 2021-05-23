@@ -20,9 +20,6 @@
 #include<unistd.h>
 #endif
 
-
-
-
 class XMLRPC
 {
 public:
@@ -53,14 +50,14 @@ public:
                 this->_signature = "i:i";
                 // method's result and two arguments are integers
                 this->_help = "Getting a grip";
+                //mc = motorCtrl;
                 mc = motorCtrl;
             }
             void
             execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
                 std::cout << "grip" << std::endl;
 
-
-                mc.grip(1000);
+                mc.grip(500);
 
                 *retvalP = xmlrpc_c::value_int(42);
 
@@ -78,11 +75,12 @@ public:
                 this->_signature = "n:n";
                 // method's result and two arguments are integers
                 this->_help = "Letting go of the grip";
+                //mc = motorCtrl;
                 mc = motorCtrl;
             }
             void
             execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-                std::cout << "Secure grip - soft" << std::endl;
+                std::cout << "release" << std::endl;
 
                 mc.calibrate();
 
@@ -91,11 +89,9 @@ public:
         private:
             MotorControl mc;
         };
-
+    XMLRPC();
     XMLRPC(MotorControl motorCtrl);
     void runServer(const unsigned int port);
-
-    std::string getState();
 
     MotorControl mc;
 };
