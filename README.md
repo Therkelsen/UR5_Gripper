@@ -3,6 +3,7 @@
 dRobTek Group 6 - Second semester project for B.E. in Robotics Technology
 <p align="center"> <img src="Assets/UR5.png" alt="UR5" title="UR5" width="60%" height="60%"/> </p>
 <br>
+
 ## Problem
 <div style="text-align: justify">A gripper for the Universal Robots UR5 robot is to be developed during this semester project. An idea could be to follow the block diagram below, but not required.</div>
 <br>
