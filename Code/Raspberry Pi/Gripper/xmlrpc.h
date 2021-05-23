@@ -35,7 +35,7 @@ public:
             }
             void
             execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-                std::cout << "Hello there" << std::endl;
+                std::cout << "XMLRPC: URCap successfully connected" << std::endl;
 
                 *retvalP = xmlrpc_c::value_int(42);
             }
@@ -43,7 +43,7 @@ public:
 
         class SecureGrip : public xmlrpc_c::method {
         public:
-            SecureGrip(MotorControl motorCtrl) {
+            SecureGrip(MotorControl mc) {
                 // signature and help strings are documentation -- the client
                 // can query this information with a system.methodSignature and
                 // system.methodHelp RPC.
@@ -51,24 +51,24 @@ public:
                 // method's result and two arguments are integers
                 this->_help = "Getting a grip";
                 //mc = motorCtrl;
-                mc = motorCtrl;
+                _mc = mc;
             }
             void
             execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-                std::cout << "grip" << std::endl;
+                std::cout << "XMLRPC: Gripping object" << std::endl;
 
-                mc.grip(500);
+                _mc.grip(500);
 
                 *retvalP = xmlrpc_c::value_int(42);
 
             }
         private:
-            MotorControl mc;
+            MotorControl _mc;
         };
 
         class ReleaseGrip : public xmlrpc_c::method {
         public:
-            ReleaseGrip(MotorControl motorCtrl) {
+            ReleaseGrip(MotorControl mc) {
                 // signature and help strings are documentation -- the client
                 // can query this information with a system.methodSignature and
                 // system.methodHelp RPC.
@@ -76,21 +76,21 @@ public:
                 // method's result and two arguments are integers
                 this->_help = "Letting go of the grip";
                 //mc = motorCtrl;
-                mc = motorCtrl;
+                _mc = mc;
             }
             void
             execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value* const retvalP) {
-                std::cout << "release" << std::endl;
+                std::cout << "XMLRPC: Releasing object" << std::endl;
 
-                mc.calibrate();
+                _mc.calibrate();
 
                 *retvalP = xmlrpc_c::value_int(42);
             }
         private:
-            MotorControl mc;
+            MotorControl _mc;
         };
     XMLRPC();
-    XMLRPC(MotorControl motorCtrl);
+    XMLRPC(MotorControl mc);
     void runServer(const unsigned int port);
 
     MotorControl mc;

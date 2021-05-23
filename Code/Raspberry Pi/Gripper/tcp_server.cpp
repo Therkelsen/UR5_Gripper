@@ -56,7 +56,7 @@ void tcp_server::runServer(std::string string) {
     valread = read( new_socket , buffer, 1024);
     printf("%s\n",buffer );
     send(new_socket, hello, strlen(hello), 0);
-    printf("Hello message sent\n");
+    printf("TCP/IP: String sent to client\n");
 }
 
 void tcp_server::error(const char *msg) {

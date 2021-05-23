@@ -41,7 +41,7 @@ MotorControl::MotorControl(int motorEnable, int motorPin1, int motorPin2, int se
 }
 
 int MotorControl::calibrate(){
-    std::cout << "MotorControl: Calibrating" << std::endl;
+    std::cout << "MotorControl: Calibrating gripper" << std::endl;
     STATE = " CALIBRATE";
     while (true) {
         if (digitalRead(_sensor) == HIGH) {
@@ -60,7 +60,7 @@ int MotorControl::calibrate(){
 }
 
 void MotorControl::grip(unsigned int time){
-    std::cout << "MotorControl: Grip" << std::endl;
+    std::cout << "MotorControl: Gripping object" << std::endl;
 
     //  Calibrate gripper
     calibrate();
@@ -81,7 +81,7 @@ void MotorControl::release(){
 }
 
 void MotorControl::close(unsigned int time) {
-    std::cout << "MotorControl: Close" << std::endl;
+    std::cout << "MotorControl: Closing gripper" << std::endl;
     softPwmWrite(_motorEnable,100);
     delay(time);
     softPwmWrite(_motorEnable,0);

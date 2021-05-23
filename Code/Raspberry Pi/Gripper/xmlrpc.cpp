@@ -21,8 +21,8 @@
 
 XMLRPC::XMLRPC(){}
 
-XMLRPC::XMLRPC(MotorControl motorCtrl){
-    mc = motorCtrl;
+XMLRPC::XMLRPC(MotorControl mc){
+    _mc = mc;
 }
 
 void XMLRPC::runServer(const unsigned int port){
@@ -33,8 +33,8 @@ void XMLRPC::runServer(const unsigned int port){
         xmlrpc_c::registry myRegistry;
 
         xmlrpc_c::methodPtr const areYouThere(new AreYouThere);
-        xmlrpc_c::methodPtr const secureGrip(new SecureGrip(mc));
-        xmlrpc_c::methodPtr const releaseGrip(new ReleaseGrip(mc));
+        xmlrpc_c::methodPtr const secureGrip(new SecureGrip(_mc));
+        xmlrpc_c::methodPtr const releaseGrip(new ReleaseGrip(_mc));
 
         myRegistry.addMethod("are_you_there", areYouThere);
         myRegistry.addMethod("secure_grip", secureGrip);
@@ -50,6 +50,6 @@ void XMLRPC::runServer(const unsigned int port){
         //assert(false);
 
     } catch (std::exception const& e) {
-        std::cerr << "ERROR: " << e.what() << std::endl;
+        std::cerr << "XMLRPC ERROR: " << e.what() << std::endl;
     }
 }
