@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1621785164503
+Build-Jdk: 1.8.0_292
+Built-By: ur
+Bundle-Activator: com.gruppe6.rpcxmlgripper.impl.Activator
+Bundle-Category: URCap
+Bundle-ContactAddress: 123 URCap Street
+Bundle-Copyright: Copyright notice (C)
+Bundle-Description: This is a description of the URCap
+Bundle-LicenseType: License type
+Bundle-ManifestVersion: 2
+Bundle-Name: rpcxmlgripper
+Bundle-SymbolicName: com.gruppe6.rpcxmlgripper
+Bundle-Vendor: URCaps R us Inc.
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Import-Package: com.ur.urcap.api.contribution;version="[1.8,2)",com.ur.u
+ rcap.api.contribution.installation;version="[1.7,2)",com.ur.urcap.api.c
+ ontribution.installation.swing;version="[1.7,2)",com.ur.urcap.api.contr
+ ibution.program;version="[1.8,2)",com.ur.urcap.api.contribution.program
+ .swing;version="[1.7,2)",com.ur.urcap.api.domain;version="[1.9,2)",com.
+ ur.urcap.api.domain.data;version="[1.9,2)",com.ur.urcap.api.domain.scri
+ pt;version="[1.7,2)",com.ur.urcap.api.domain.undoredo;version="[1.7,2)"
+ ,com.ur.urcap.api.domain.userinteraction;version="[1.8,2)",com.ur.urcap
+ .api.domain.userinteraction.inputvalidation;version="[1.7,2)",com.ur.ur
+ cap.api.domain.userinteraction.keyboard;version="[1.7,2)",javax.swing,o
+ rg.osgi.framework;version="[1.6,2)"
+Tool: Bnd-2.1.0.20130426-122213
