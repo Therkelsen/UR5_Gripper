@@ -16,25 +16,18 @@ using namespace std;
 
 int main() {
     softPwmStop(motorEnable);
+    softPwmWrite(motorEnable, 0);
 
-    tcp_server socket(tcpipPort);
+    tcp_server socket(8080);
 
     MotorControl mc(motorEnable, motorPin1, motorPin2, sensor, socket);
 
-    delay(10000);
-
-    while (true) {
-        mc.grip(500);
-
-        delay(2500);
-
-        mc.release();
-    }
+    mc.calibrate();
 
     softPwmWrite(motorEnable, 0);
 
     XMLRPC server(mc);
-    //server.runServer(xmlrpcPort);
+    server.runServer(xmlrpcPort);
 
     return 0;
 }

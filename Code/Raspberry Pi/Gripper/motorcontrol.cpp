@@ -53,7 +53,7 @@ int MotorControl::calibrate(){
             digitalWrite(_motorPin1, LOW);
             digitalWrite(_motorPin2, HIGH);
 
-            sendString();
+            //sendString();
             return 0;
         }
     }
@@ -63,7 +63,7 @@ void MotorControl::grip(unsigned int time){
     std::cout << "MotorControl: Grip" << std::endl;
 
     //  Calibrate gripper
-    //calibrate();
+    calibrate();
 
     STATE = "GRIP";
     _numberOfGrips++;
@@ -72,6 +72,7 @@ void MotorControl::grip(unsigned int time){
     softPwmWrite(_motorEnable,100);
     delay(time);
     softPwmWrite(_motorEnable,0);
+    sendString();
 }
 
 void MotorControl::release(){
@@ -101,7 +102,7 @@ void MotorControl::sendString() {
     socket.runServer(string);
 }
 
-/*void MotorControl::reverse(unsigned int time){
+void MotorControl::reverse(unsigned int time){
     digitalWrite(_motorPin1, HIGH);
     digitalWrite(_motorPin2, LOW);
     softPwmWrite(_motorEnable,100);
@@ -119,4 +120,4 @@ void MotorControl::test(){
             std::cout << "LOW" << std::endl;
         }
     }
-}*/
+}
